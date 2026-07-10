@@ -30,7 +30,7 @@ graph TD
         Sim -->|Writes Traces| Traces[output/simulated_traces.json]
     end
 
-    subgraph Step 3: Evaluation & Reporting
+    subgraph Step 3: Evaluation
         Scen -->|Reference| S3[3_evaluate_traces.py]
         Traces -->|Evaluation Input| S3
         S3 -->|Triggers evaluate| Evals[Vertex AI Evals Service]
