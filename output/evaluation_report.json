@@ -1,0 +1,1227 @@
+{
+  "eval_case_results": [
+    {
+      "eval_case_index": 0,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "multi_turn_task_success_v1": {
+              "metric_name": "multi_turn_task_success_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "a2e95332",
+                    "content": {
+                      "property": {
+                        "description": "The response provides the available flights from SFO to JFK on 2024-10-17."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly queried for the updated date requested by the user and presented the results accurately based on the tool output."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "ebf28ed7",
+                    "content": {
+                      "property": {
+                        "description": "The response confirms that flight FL-102 has been successfully booked and provides a booking reference code."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent successfully performed the booking action using the appropriate tool and communicated the specific confirmation reference code to the user as required."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            },
+            "multi_turn_trajectory_quality_v1": {
+              "metric_name": "multi_turn_trajectory_quality_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "b561592c",
+                    "content": {
+                      "property": {
+                        "description": "There should be evidence in the trajectory or tool calls/responses that the initial request to book a flight on 2024-10-16 was skipped or abandoned."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The user explicitly changed the travel date from the 16th to the 17th in Turn 2, and the agent pivoted to searching for and booking flights on the 17th, effectively abandoning the initial request as directed."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "cf135530",
+                    "content": {
+                      "property": {
+                        "description": "The agent must call the 'find_flights' function to search for available flights."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent used the 'find_flights' tool in both the first and second turns to satisfy the user's requests for flight information."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "40c4a402",
+                    "content": {
+                      "property": {
+                        "description": "For the 'find_flights' call, the 'origin' parameter must exactly match 'SFO', the 'destination' parameter must exactly match 'JFK', and the 'date' parameter must exactly match '2024-10-17'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly specified 'SFO' as the origin, 'JFK' as the destination, and '2024-10-17' as the date in the tool call performed in Turn 2."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "6ba980d4",
+                    "content": {
+                      "property": {
+                        "description": "The agent must NOT execute the 'book_flight' action unless it has successfully identified the available flights and their IDs from the previous search."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent performed the search, received the flight IDs from the tool output, and only proceeded to book 'FL-102' after the user selected it from the provided results."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "cceff795",
+                    "content": {
+                      "property": {
+                        "description": "The agent must call the 'book_flight' function to fulfill the booking intent."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly invoked the 'book_flight' tool to complete the user's request."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "a7d57a32",
+                    "content": {
+                      "property": {
+                        "description": "For the 'book_flight' call, the 'flight_id' parameter must be set to 'FL-102' (or the ID corresponding to the earliest available flight)."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent used 'FL-102' in the tool call, which matches both the user's specific selection and the earliest flight found in the search results."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "e224627c",
+                    "content": {
+                      "property": {
+                        "description": "To satisfy the user's expectation, the flight selected for booking must be the earliest available flight based on the search results."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The search results provided two flights, and the agent booked FL-102 (08:00 AM), which was the earliest option available and explicitly requested by the user."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "65b8f33d",
+                    "content": {
+                      "property": {
+                        "description": "All tool calls must strictly adhere to the required JSON schema, providing all required parameters with the correct data types."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "All tool calls throughout the trajectory were formatted correctly as JSON with the appropriate keys and string values."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "b87b74fe",
+                    "content": {
+                      "property": {
+                        "description": "Evidence must exist in the trajectory (via tool outputs) that the flight was successfully booked and a confirmation message with a booking reference code was returned."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The tool output for 'book_flight' explicitly stated the booking was successful and provided the reference code 'BK-2937'."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            },
+            "multi_turn_tool_use_quality_v1": {
+              "metric_name": "multi_turn_tool_use_quality_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "2b6b7c9d",
+                    "content": {
+                      "property": {
+                        "description": "If the agent attempted to search for flights on 2024-10-16 before cancellation, it called the `find_flights` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call(s) or user inputs in the conversation history. In Turn 1, the user expressed the intent to find flights from SFO to JFK on 2024-10-16.\nStep 2: Compare the actual function name and arguments against the property requirements. The agent called `find_flights` in Turn 1.\nStep 3: Check for schema validity or argument errors. The call was valid."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "96d862ad",
+                    "content": {
+                      "property": {
+                        "description": "If called, the `find_flights` tool call for the 2024-10-16 search adheres to the schema."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call. The tool call for 2024-10-16 occurred in Turn 1: `find_flights({\"origin\": \"SFO\", \"destination\": \"JFK\", \"date\": \"2024-10-16\"})`.\nStep 2: Compare the actual function name and arguments against the property requirements. The tool `find_flights` requires `origin`, `destination`, and `date` as strings. \nStep 3: Check for schema validity or argument errors. All required arguments are provided with correct types."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "6211e919",
+                    "content": {
+                      "property": {
+                        "description": "If called, the `origin` parameter for the 2024-10-16 search is set to 'SFO'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call for the 2024-10-16 search (Turn 1).\nStep 2: Compare the `origin` argument. The value used was \"SFO\".\nStep 3: Check for schema validity or argument errors. The value is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "8ba00e1f",
+                    "content": {
+                      "property": {
+                        "description": "If called, the `destination` parameter for the 2024-10-16 search is set to 'JFK'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call for the 2024-10-16 search (Turn 1).\nStep 2: Compare the `destination` argument. The value used was \"JFK\".\nStep 3: Check for schema validity or argument errors. The value is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "3b765d6f",
+                    "content": {
+                      "property": {
+                        "description": "If called, the `date` parameter for the 2024-10-16 search is set to '2024-10-16'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call for the 2024-10-16 search (Turn 1).\nStep 2: Compare the `date` argument. The value used was \"2024-10-16\".\nStep 3: Check for schema validity or argument errors. The value is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "31f75e1f",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `find_flights` function to search for flights on 2024-10-17."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call(s) in the conversation history. In Turn 2, after the user changed plans, the agent called `find_flights`.\nStep 2: Compare the actual function name and arguments. The agent called `find_flights` with `date=\"2024-10-17\"`.\nStep 3: Check for schema validity or argument errors. The call is valid and correctly targets the new date requested."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "3139c456",
+                    "content": {
+                      "property": {
+                        "description": "The `find_flights` tool call for the 2024-10-17 search adheres to the schema."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call in Turn 2: `find_flights({\"date\": \"2024-10-17\", \"destination\": \"JFK\", \"origin\": \"SFO\"})`.\nStep 2: Compare against tool definitions. The function requires `origin`, `destination`, and `date`.\nStep 3: Check for schema validity or argument errors. All required arguments are provided with correct types."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "262e2ce0",
+                    "content": {
+                      "property": {
+                        "description": "The `origin` parameter for the 2024-10-17 search is set to 'SFO'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call for the 2024-10-17 search (Turn 2).\nStep 2: Compare the `origin` argument. The value used was \"SFO\".\nStep 3: Check for schema validity or argument errors. The value is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "ac72fcbf",
+                    "content": {
+                      "property": {
+                        "description": "The `destination` parameter for the 2024-10-17 search is set to 'JFK'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call for the 2024-10-17 search (Turn 2).\nStep 2: Compare the `destination` argument. The value used was \"JFK\".\nStep 3: Check for schema validity or argument errors. The value is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "412918f2",
+                    "content": {
+                      "property": {
+                        "description": "The `date` parameter for the 2024-10-17 search is set to '2024-10-17'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call for the 2024-10-17 search (Turn 2).\nStep 2: Compare the `date` argument. The value used was \"2024-10-17\".\nStep 3: Check for schema validity or argument errors. The value is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "16f18dd3",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `book_flight` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call in the conversation history. In Turn 4, the agent called `book_flight`.\nStep 2: Compare the actual function name. The name matches the requirement.\nStep 3: Check for schema validity or argument errors. The call was executed."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "eb270fbd",
+                    "content": {
+                      "property": {
+                        "description": "The `book_flight` tool call adheres to the schema."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the tool call in Turn 4: `book_flight({\"flight_id\": \"FL-102\"})`.\nStep 2: Compare against tool definitions. The function requires `flight_id` (string).\nStep 3: Check for schema validity or argument errors. The required parameter is provided as a string."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "b304167d",
+                    "content": {
+                      "property": {
+                        "description": "The `flight_id` parameter is set to 'FL-102'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the `book_flight` tool call in Turn 4.\nStep 2: Compare the `flight_id` argument. The value used was \"FL-102\".\nStep 3: Check for schema validity or argument errors. The value is an exact match."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "eval_case_index": 1,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "multi_turn_task_success_v1": {
+              "metric_name": "multi_turn_task_success_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "0631f1e3",
+                    "content": {
+                      "property": {
+                        "description": "The response provides available flights from SFO to JFK on 2024-11-15."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly used the search tool for the requested date and presented the results to the user."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "07813f3f",
+                    "content": {
+                      "property": {
+                        "description": "The response highlights budget-friendly flight options for the November 15th date."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent explicitly identified the cheaper flight from the search results to cater to the user's mention of a \"budget vacation.\""
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "7d7fdd61",
+                    "content": {
+                      "property": {
+                        "description": "The response provides available flights from SFO to JFK on 2024-11-14."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly performed a new search for the alternative date requested by the user and provided the results."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "e066f6a6",
+                    "content": {
+                      "property": {
+                        "description": "The response compares the prices of the November 14th flights to the November 15th flights to identify cheaper options."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent compared the results of the second search to the first search to inform the user that no cheaper options were found for the new date."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "28c35e9c",
+                    "content": {
+                      "property": {
+                        "description": "The response identifies flight FL-102 from the search results."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent successfully extracted the specific flight ID from the tool outputs and referenced it throughout the conversation."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "dddf039f",
+                    "content": {
+                      "property": {
+                        "description": "The response confirms the successful booking of flight FL-102 and provides the booking reference code."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly called the booking tool with the requested flight ID and provided the resulting confirmation reference to the user."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            },
+            "multi_turn_trajectory_quality_v1": {
+              "metric_name": "multi_turn_trajectory_quality_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "cb4322b3",
+                    "content": {
+                      "property": {
+                        "description": "All tool calls must strictly adhere to the defined JSON schema, including required parameters and correct data types."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Every tool call in the dialogue used the correct keys and data types as specified in the tool definitions."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "e107bfae",
+                    "content": {
+                      "property": {
+                        "description": "To satisfy the first search intent, the agent must call the 'find_flights' function with the 'origin' parameter set to 'SFO', the 'destination' parameter set to 'JFK', and the 'date' parameter set to '2024-11-15'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent executed the tool call with the exact parameters requested by the user in the first turn."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "8023e835",
+                    "content": {
+                      "property": {
+                        "description": "The agent must address the expectation for budget-friendly options by filtering, sorting, or explicitly highlighting the cheapest flights from the 2024-11-15 search results."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly identified and pointed out the lower-priced flight to the user, acknowledging the budget vacation context."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "40ddd315",
+                    "content": {
+                      "property": {
+                        "description": "To satisfy the second search intent, the agent must call the 'find_flights' function with the 'origin' parameter set to 'SFO', the 'destination' parameter set to 'JFK', and the 'date' parameter set to '2024-11-14'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly called the search tool with the new date requested by the user."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "4b31b991",
+                    "content": {
+                      "property": {
+                        "description": "The agent must compare the flight prices between the 2024-11-14 and 2024-11-15 search results to identify and present the cheaper options as requested."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent compared the results from both dates and informed the user that the prices were identical, fulfilling the request to look for cheaper options."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "0abcc9a8",
+                    "content": {
+                      "property": {
+                        "description": "The agent must NOT execute the 'book_flight' action unless it has successfully identified the flight ID (FL-102) from the previous search results."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent only booked the flight after identifying the flight ID through valid search tool calls."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "cfb15de9",
+                    "content": {
+                      "property": {
+                        "description": "To satisfy the booking intent, the agent must call the 'book_flight' function with the 'flight_id' parameter exactly matching 'FL-102'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent used the correct flight ID in the booking tool call as requested by the user and found in the search results."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "5d17e1de",
+                    "content": {
+                      "property": {
+                        "description": "Evidence must exist in the trajectory (via the 'book_flight' tool output) that the flight was successfully booked and a confirmation message or reference code was returned."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The tool output explicitly confirms the successful booking and provides the reference code BK-2937."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            },
+            "multi_turn_tool_use_quality_v1": {
+              "metric_name": "multi_turn_tool_use_quality_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "d36faca9",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `find_flights` function to search for flights on 2024-11-15."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call. In Turn 1, the agent calls `find_flights({\"origin\": \"SFO\", \"date\": \"2024-11-15\", \"destination\": \"JFK\"})`.\nStep 2: The tool name `find_flights` matches. The argument `date` is \"2024-11-15\", which matches the user's intent in Turn 1.\nStep 3: The call is valid and correctly reflects the search request."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "a165cae7",
+                    "content": {
+                      "property": {
+                        "description": "The `find_flights` tool call for 2024-11-15 adheres to the schema (valid JSON, required parameters present)."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the tool call in Turn 1: `find_flights({\"origin\": \"SFO\", \"date\": \"2024-11-15\", \"destination\": \"JFK\"})`.\nStep 2: Compare against the tool definition. The tool requires `origin`, `destination`, and `date`. All three are present in the JSON argument.\nStep 3: The schema is followed correctly."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "dcb3fe2d",
+                    "content": {
+                      "property": {
+                        "description": "The `origin` parameter in the `find_flights` call for 2024-11-15 is set to 'SFO'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the Turn 1 tool call: `find_flights({\"origin\": \"SFO\", \"date\": \"2024-11-15\", \"destination\": \"JFK\"})`.\nStep 2: The `origin` argument is \"SFO\".\nStep 3: This is an exact match for the requirement."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "dc3d4165",
+                    "content": {
+                      "property": {
+                        "description": "The `destination` parameter in the `find_flights` call for 2024-11-15 is set to 'JFK'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the Turn 1 tool call: `find_flights({\"origin\": \"SFO\", \"date\": \"2024-11-15\", \"destination\": \"JFK\"})`.\nStep 2: The `destination` argument is \"JFK\".\nStep 3: This is an exact match for the requirement."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "c0e187bb",
+                    "content": {
+                      "property": {
+                        "description": "The `date` parameter in the `find_flights` call is set to '2024-11-15'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the tool calls for `find_flights`. There are two: one in Turn 1 and one in Turn 2.\nStep 2: In Turn 1, the agent calls `find_flights` with `date=\"2024-11-15\"`. \nStep 3: The parameter matches the requirement."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "548a4def",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `find_flights` function to search for flights on 2024-11-14."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call. In Turn 2, the user asks for options on November 14th. The agent calls `find_flights({\"destination\": \"JFK\", \"date\": \"2024-11-14\", \"origin\": \"SFO\"})`.\nStep 2: The tool name `find_flights` matches and the `date` argument is \"2024-11-14\".\nStep 3: The call is valid."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "8f8556d4",
+                    "content": {
+                      "property": {
+                        "description": "The `find_flights` tool call for 2024-11-14 adheres to the schema (valid JSON, required parameters present)."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the Turn 2 tool call: `find_flights({\"destination\": \"JFK\", \"date\": \"2024-11-14\", \"origin\": \"SFO\"})`.\nStep 2: The tool requires `origin`, `destination`, and `date`. All three are present in the call.\nStep 3: The call adheres to the schema."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "3cca103f",
+                    "content": {
+                      "property": {
+                        "description": "The `origin` parameter in the `find_flights` call for 2024-11-14 is set to 'SFO'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the Turn 2 tool call: `find_flights({\"destination\": \"JFK\", \"date\": \"2024-11-14\", \"origin\": \"SFO\"})`.\nStep 2: The `origin` argument is \"SFO\".\nStep 3: This is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "a28ec952",
+                    "content": {
+                      "property": {
+                        "description": "The `destination` parameter in the `find_flights` call for 2024-11-14 is set to 'JFK'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the Turn 2 tool call: `find_flights({\"destination\": \"JFK\", \"date\": \"2024-11-14\", \"origin\": \"SFO\"})`.\nStep 2: The `destination` argument is \"JFK\".\nStep 3: This is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "e7f91544",
+                    "content": {
+                      "property": {
+                        "description": "The `date` parameter in the `find_flights` call is set to '2024-11-14'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the Turn 2 tool call: `find_flights({\"destination\": \"JFK\", \"date\": \"2024-11-14\", \"origin\": \"SFO\"})`.\nStep 2: The `date` argument is \"2024-11-14\".\nStep 3: This is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "4e7269ac",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `book_flight` function to book the flight."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the tool call in Turn 3. The agent calls `book_flight({\"flight_id\": \"FL-102\"})`.\nStep 2: The function name `book_flight` matches the requirement.\nStep 3: The call is valid."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "8da52917",
+                    "content": {
+                      "property": {
+                        "description": "The `book_flight` tool call adheres to the schema (valid JSON, required parameters present)."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the Turn 3 tool call: `book_flight({\"flight_id\": \"FL-102\"})`.\nStep 2: The tool definition requires one argument: `flight_id`. This is present in the JSON.\nStep 3: The call is valid according to the schema."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "a3a30ee5",
+                    "content": {
+                      "property": {
+                        "description": "The `flight_id` parameter in the `book_flight` call is set to 'FL-102'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the Turn 3 tool call: `book_flight({\"flight_id\": \"FL-102\"})`.\nStep 2: The `flight_id` argument passed is \"FL-102\".\nStep 3: This matches the user's request in Turn 3 (\"Let's go ahead and book FL-102\")."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "eval_case_index": 2,
+      "response_candidate_results": [
+        {
+          "response_index": 0,
+          "metric_results": {
+            "multi_turn_task_success_v1": {
+              "metric_name": "multi_turn_task_success_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "4814fd82",
+                    "content": {
+                      "property": {
+                        "description": "The response provides the available flights from SFO to JFK on 2024-05-17."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent correctly searched for and provided the flight options for the requested date."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "da5b85f1",
+                    "content": {
+                      "property": {
+                        "description": "The response confirms that flight FL-205 has been successfully booked and provides the booking reference code."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent successfully performed the booking action and communicated the confirmation details to the user."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            },
+            "multi_turn_trajectory_quality_v1": {
+              "metric_name": "multi_turn_trajectory_quality_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "50e72f76",
+                    "content": {
+                      "property": {
+                        "description": "The agent must call the 'find_flights' function to search for flights on the initial requested date."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent successfully called the find_flights tool in the first turn."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "2975c1b2",
+                    "content": {
+                      "property": {
+                        "description": "For the first search, the 'origin' parameter must exactly match 'SFO', the 'destination' parameter must exactly match 'JFK', and the 'date' parameter must exactly match '2024-05-14'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The tool call arguments for the first search were exactly as specified in the property."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "46527a56",
+                    "content": {
+                      "property": {
+                        "description": "There must be evidence in the trajectory that the booking for the 2024-05-14 flight was skipped or abandoned; the agent must NOT call 'book_flight' for any flight found on 2024-05-14."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent did not attempt to book any flight from the first search results, respecting the user's change of plans."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "aea2b297",
+                    "content": {
+                      "property": {
+                        "description": "The agent must call the 'find_flights' function to search for flights on the updated requested date."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent called find_flights for the second requested date (May 17)."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "6fdf6fe5",
+                    "content": {
+                      "property": {
+                        "description": "For the second search, the 'origin' parameter must exactly match 'SFO', the 'destination' parameter must exactly match 'JFK', and the 'date' parameter must exactly match '2024-05-17'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The tool call arguments for the second search were exactly as specified in the property."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "90654b8f",
+                    "content": {
+                      "property": {
+                        "description": "The agent must NOT execute the 'book_flight' action for the 2024-05-17 flight unless it has successfully identified flight FL-205 from the previous search results."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The second search result successfully identified flight FL-205 before the agent attempted to book it."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "37a624d9",
+                    "content": {
+                      "property": {
+                        "description": "The agent must call the 'book_flight' function to finalize the booking for the 2024-05-17 flight."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent successfully called the book_flight tool to process the booking."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "129b7e65",
+                    "content": {
+                      "property": {
+                        "description": "The 'flight_id' parameter passed to the 'book_flight' function must exactly match 'FL-205'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "The agent used the correct flight ID in the book_flight tool call."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "a3403162",
+                    "content": {
+                      "property": {
+                        "description": "To satisfy the user's expectation, there must be evidence that the selected flight (FL-205) corresponds to the later flight option from the retrieved search results."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Based on the search results, FL-205 (01:00 PM) was the later flight compared to FL-102 (08:00 AM)."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "f57b21dd",
+                    "content": {
+                      "property": {
+                        "description": "All tool calls must strictly adhere to the defined JSON schema, including correct data types and the presence of all required parameters."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Every tool call in the trajectory followed the expected schema and used the correct data types."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            },
+            "multi_turn_tool_use_quality_v1": {
+              "metric_name": "multi_turn_tool_use_quality_v1",
+              "score": 1.0,
+              "explanation": "",
+              "rubric_verdicts": [
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "d9cf5c10",
+                    "content": {
+                      "property": {
+                        "description": "If the agent attempted to search for flights before cancellation, it called the `find_flights` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call(s) or user inputs in the conversation history. In Turn 1, the user requested a flight for 2024-05-14. In Turn 2, the user changed their mind (\"I think I would prefer to fly out on May 17th... instead\"), abandoning the initial search intent for May 14.\nStep 2: Compare the actual function name and arguments against the property requirements. The agent called `find_flights` in Turn 1 before the user changed the date in Turn 2.\nStep 3: Check for schema validity or argument errors. The call was correctly formatted."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "04282f3f",
+                    "content": {
+                      "property": {
+                        "description": "If `find_flights` was called for the abandoned intent, the tool call adheres to the schema."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call. The abandoned intent corresponds to the search for May 14th in Turn 1. The agent called `find_flights({\"origin\": \"SFO\", \"destination\": \"JFK\", \"date\": \"2024-05-14\"})`.\nStep 2: Compare against tool definition. The `find_flights` tool requires `origin`, `destination`, and `date` as strings.\nStep 3: Check for schema validity. All required parameters were provided with the correct types."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "9e7dca1e",
+                    "content": {
+                      "property": {
+                        "description": "If `find_flights` was called for the abandoned intent, the `origin` parameter is exactly 'SFO'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call in Turn 1.\nStep 2: Check the `origin` argument. The value used was \"SFO\".\nStep 3: Compare \"SFO\" to the required \"SFO\". It is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "06b66de5",
+                    "content": {
+                      "property": {
+                        "description": "If `find_flights` was called for the abandoned intent, the `destination` parameter is exactly 'JFK'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call in Turn 1.\nStep 2: Check the `destination` argument. The value used was \"JFK\".\nStep 3: Compare \"JFK\" to the required \"JFK\". It is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "64ce971f",
+                    "content": {
+                      "property": {
+                        "description": "If `find_flights` was called for the abandoned intent, the `date` parameter is exactly '2024-05-14'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "MEDIUM"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call in Turn 1.\nStep 2: Check the `date` argument. The value used was \"2024-05-14\".\nStep 3: Compare \"2024-05-14\" to the required \"2024-05-14\". It is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "116777ce",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `find_flights` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Scan conversation history. The agent called `find_flights` in Turn 1 and Turn 2.\nStep 2: The function name matches the requirement.\nStep 3: Call appears valid."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "3da11f63",
+                    "content": {
+                      "property": {
+                        "description": "The `find_flights` tool call adheres to the schema."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the relevant tool call. The agent called `find_flights` in Turn 2 for the updated date.\nStep 2: Compare against tool definition. The tool requires `origin`, `destination`, and `date`.\nStep 3: In Turn 2, the agent called `find_flights({\"date\": \"2024-05-17\", \"destination\": \"JFK\", \"origin\": \"SFO\"})`. All parameters are present and are strings."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "f4ac053c",
+                    "content": {
+                      "property": {
+                        "description": "The `origin` parameter in the `find_flights` call is exactly 'SFO'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the tool call in Turn 2.\nStep 2: Check the `origin` argument. The value is \"SFO\".\nStep 3: Compare to the required \"SFO\". It is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "88f51b5d",
+                    "content": {
+                      "property": {
+                        "description": "The `destination` parameter in the `find_flights` call is exactly 'JFK'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the tool call in Turn 2.\nStep 2: Check the `destination` argument. The value is \"JFK\".\nStep 3: Compare to the required \"JFK\". It is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "57871f13",
+                    "content": {
+                      "property": {
+                        "description": "The `date` parameter in the `find_flights` call is exactly '2024-05-17'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the tool call in Turn 2 (the search for the user's final desired date).\nStep 2: Check the `date` argument. The value is \"2024-05-17\".\nStep 3: Compare to the required \"2024-05-17\". It is an exact match."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "a29aa98f",
+                    "content": {
+                      "property": {
+                        "description": "The agent calls the `book_flight` function."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Scan conversation history. In Turn 3, the agent called `book_flight`.\nStep 2: Function name matches.\nStep 3: Call appears valid."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "31d450bf",
+                    "content": {
+                      "property": {
+                        "description": "The `book_flight` tool call adheres to the schema."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the tool call in Turn 3.\nStep 2: Compare against tool definition. `book_flight` requires `flight_id` as a string.\nStep 3: The agent passed `{\"flight_id\": \"FL-205\"}`, which is a valid string."
+                },
+                {
+                  "evaluated_rubric": {
+                    "rubric_id": "f8292125",
+                    "content": {
+                      "property": {
+                        "description": "The `flight_id` parameter in the `book_flight` call is exactly 'FL-205'."
+                      }
+                    },
+                    "type": "",
+                    "importance": "HIGH"
+                  },
+                  "verdict": true,
+                  "reasoning": "Locate the tool call in Turn 3.\nStep 2: Check the `flight_id` argument. The user requested \"the later flight\" (FL-205) and explicitly mentioned \"FL-205\". The agent used \"FL-205\".\nStep 3: Compare to the required \"FL-205\". It is an exact match."
+                }
+              ],
+              "raw_output": null,
+              "error_message": null
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "summary_metrics": [
+    {
+      "metric_name": "multi_turn_task_success_v1",
+      "num_cases_total": 3,
+      "num_cases_valid": 3,
+      "num_cases_error": 0,
+      "mean_score": 1.0,
+      "stdev_score": 0.0,
+      "pass_rate": 1.0
+    },
+    {
+      "metric_name": "multi_turn_trajectory_quality_v1",
+      "num_cases_total": 3,
+      "num_cases_valid": 3,
+      "num_cases_error": 0,
+      "mean_score": 1.0,
+      "stdev_score": 0.0,
+      "pass_rate": 1.0
+    },
+    {
+      "metric_name": "multi_turn_tool_use_quality_v1",
+      "num_cases_total": 3,
+      "num_cases_valid": 3,
+      "num_cases_error": 0,
+      "mean_score": 1.0,
+      "stdev_score": 0.0,
+      "pass_rate": 1.0
+    }
+  ],
+  "win_rates": null,
+  "evaluation_dataset": [
+    {
+      "bigquery_source": null,
+      "gcs_source": null,
+      "eval_cases": null,
+      "eval_dataset_df": null,
+      "candidate_name": null
+    }
+  ],
+  "metadata": {
+    "candidate_names": [
+      "candidate_1"
+    ],
+    "dataset_name": null,
+    "dataset_id": null,
+    "creation_timestamp": "2026-07-10T15:54:30.904288Z"
+  },
+  "agent_info": null
+}

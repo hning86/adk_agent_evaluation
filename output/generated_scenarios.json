@@ -1,0 +1,59 @@
+{
+  "bigquery_source": null,
+  "gcs_source": null,
+  "eval_cases": [
+    {
+      "prompt": null,
+      "responses": null,
+      "reference": null,
+      "system_instruction": null,
+      "conversation_history": null,
+      "rubric_groups": null,
+      "eval_case_id": null,
+      "intermediate_events": null,
+      "agent_info": null,
+      "agent_data": null,
+      "user_scenario": {
+        "starting_prompt": "I need to get from SFO to JFK for a critical business meeting on 2024-10-16.",
+        "conversation_plan": "When the agent provides the available flights for 2024-10-16, complain that the meeting was pushed back and ask to check flights for the next day, 2024-10-17 instead. Once the agent provides the flights for the 17th, identify the earliest flight and instruct the agent to book it by providing its specific flight ID.",
+        "test_case_title": "Business Travel Date Pivot Booking"
+      }
+    },
+    {
+      "prompt": null,
+      "responses": null,
+      "reference": null,
+      "system_instruction": null,
+      "conversation_history": null,
+      "rubric_groups": null,
+      "eval_case_id": null,
+      "intermediate_events": null,
+      "agent_info": null,
+      "agent_data": null,
+      "user_scenario": {
+        "starting_prompt": "Hi there! I'm planning a budget vacation and I want to fly from SFO to JFK on 2024-11-15.",
+        "conversation_plan": "Wait for the agent to list the flight options for 2024-11-15. Once they do, state that the prices are too high and ask if there are cheaper options on 2024-11-14. After the agent lists the flights for the 14th, tell the agent to book the cheapest flight by explicitly specifying its flight ID.",
+        "test_case_title": "Budget Search Date Pivot Booking"
+      }
+    },
+    {
+      "prompt": null,
+      "responses": null,
+      "reference": null,
+      "system_instruction": null,
+      "conversation_history": null,
+      "rubric_groups": null,
+      "eval_case_id": null,
+      "intermediate_events": null,
+      "agent_info": null,
+      "agent_data": null,
+      "user_scenario": {
+        "starting_prompt": "Hello. I need a flight for 2024-05-14 from SFO to JFK so I can visit my grandson.",
+        "conversation_plan": "When the agent returns flights for 2024-05-14, act indecisive and say you would actually prefer to fly out on 2024-05-17 to give yourself more packing time. Once the agent searches and returns the new flights, tell them to book the latest flight available that day by providing its exact flight ID from their list.",
+        "test_case_title": "Indecisive Date Change And Book"
+      }
+    }
+  ],
+  "eval_dataset_df": null,
+  "candidate_name": null
+}

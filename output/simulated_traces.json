@@ -1,0 +1,875 @@
+[
+  {
+    "starting_prompt": "I need to get from SFO to JFK for a critical business meeting on 2024-10-16.",
+    "conversation_plan": "When the agent provides the available flights for 2024-10-16, complain that the meeting was pushed back and ask to check flights for the next day, 2024-10-17 instead. Once the agent provides the flights for the 17th, identify the earliest flight and instruct the agent to book it by providing its specific flight ID.",
+    "agent_data": {
+      "agents": {
+        "travel_agent": {
+          "agent_id": "travel_agent",
+          "agent_type": "LlmAgent",
+          "description": "",
+          "instruction": "You are a travel expert, help users to find flights, book flights with flight ID",
+          "tools": [
+            {
+              "function_declarations": [
+                {
+                  "description": "Find available flights between origin and destination on a given date.\n\nArgs:\n    origin: The starting airport code or city (e.g., 'SFO').\n    destination: The destination airport code or city (e.g., 'JFK').\n    date: The date of the flight (e.g., '2026-07-13').\n    \nReturns:\n    A list of available flights with IDs and prices.",
+                  "name": "find_flights",
+                  "parameters_json_schema": {
+                    "properties": {
+                      "origin": {
+                        "title": "Origin",
+                        "type": "string"
+                      },
+                      "destination": {
+                        "title": "Destination",
+                        "type": "string"
+                      },
+                      "date": {
+                        "title": "Date",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "origin",
+                      "destination",
+                      "date"
+                    ],
+                    "title": "find_flightsParams",
+                    "type": "object"
+                  },
+                  "response_json_schema": {
+                    "type": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "function_declarations": [
+                {
+                  "description": "Book a flight using its flight ID.\n\nArgs:\n    flight_id: The unique ID of the flight to book.\n    \nReturns:\n    A confirmation message with a booking reference code.",
+                  "name": "book_flight",
+                  "parameters_json_schema": {
+                    "properties": {
+                      "flight_id": {
+                        "title": "Flight Id",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "flight_id"
+                    ],
+                    "title": "book_flightParams",
+                    "type": "object"
+                  },
+                  "response_json_schema": {
+                    "type": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "sub_agents": []
+        }
+      },
+      "turns": [
+        {
+          "turn_index": 0,
+          "turn_id": "e-54ed19ef-a43a-4f31-aad6-a85e443ba7ea",
+          "events": [
+            {
+              "author": "user",
+              "content": {
+                "parts": [
+                  {
+                    "text": "I need to get from SFO to JFK for a critical business meeting on 2024-10-16."
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:42:42.764321+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_call": {
+                      "id": "adk-5868443e-5d23-4797-a908-e18bd43a45c5",
+                      "args": {
+                        "origin": "SFO",
+                        "date": "2024-10-16",
+                        "destination": "JFK"
+                      },
+                      "name": "find_flights"
+                    },
+                    "thought_signature": "AY89a1+q1za963JwBTEzn/IB3BZiZdeDAf0k1gS9F+eH2+CRwvCKH9IHnm5nBDhRU98="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:42:42.764321+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_response": {
+                      "id": "adk-5868443e-5d23-4797-a908-e18bd43a45c5",
+                      "name": "find_flights",
+                      "response": {
+                        "result": "Available flights: Flight ID FL-102 (Price: $350, Time: 08:00 AM), Flight ID FL-205 (Price: $420, Time: 01:00 PM)"
+                      }
+                    }
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:42:42.764321+00:00"
+            },
+            {
+              "author": "agent",
+              "content": {
+                "parts": [
+                  {
+                    "text": "I found two available flights from SFO to JFK on October 16, 2024:\n\n1. **Flight ID: FL-102**\n   * **Departure Time:** 08:00 AM\n   * **Price:** $350\n\n2. **Flight ID: FL-205**\n   * **Departure Time:** 01:00 PM\n   * **Price:** $420\n\nSince this is for a critical business meeting, the morning flight (FL-102) might be a great option to ensure you arrive with time to spare. \n\nWould you like me to book one of these flights for you? Please let me know your preferred flight ID.",
+                    "thought_signature": "AY89a1+ECi8SWX7TxWox6HMWo3xWfjNbuvFZVfsisM0HQo7dB/yGBohtg/YVcJOrz70="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:42:42.764321+00:00"
+            }
+          ]
+        },
+        {
+          "turn_index": 1,
+          "turn_id": "e-373f1c6b-7d07-4eb8-be83-6455672d3131",
+          "events": [
+            {
+              "author": "user",
+              "content": {
+                "parts": [
+                  {
+                    "text": "Ah, plans just changed. My meeting actually got pushed back, so I need to fly out the next day, October 17th, instead. Can you check what flights are available from SFO to JFK on 2024-10-17?"
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:42:55.787972+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_call": {
+                      "id": "adk-ef29d214-8237-4bb2-8bf3-0d3b1a0c04f6",
+                      "args": {
+                        "destination": "JFK",
+                        "date": "2024-10-17",
+                        "origin": "SFO"
+                      },
+                      "name": "find_flights"
+                    },
+                    "thought_signature": "AY89a18te9QGeXGucKOJIn/E/92xeho6h3uwicukJjausPv4sNDmnavBue8AG3IsJGc="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:42:55.787972+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_response": {
+                      "id": "adk-ef29d214-8237-4bb2-8bf3-0d3b1a0c04f6",
+                      "name": "find_flights",
+                      "response": {
+                        "result": "Available flights: Flight ID FL-102 (Price: $350, Time: 08:00 AM), Flight ID FL-205 (Price: $420, Time: 01:00 PM)"
+                      }
+                    }
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:42:55.787972+00:00"
+            },
+            {
+              "author": "agent",
+              "content": {
+                "parts": [
+                  {
+                    "text": "Here are the available flights from SFO to JFK on October 17, 2024:\n\n1. **Flight ID: FL-102**\n   * **Departure Time:** 08:00 AM\n   * **Price:** $350\n\n2. **Flight ID: FL-205**\n   * **Departure Time:** 01:00 PM\n   * **Price:** $420\n\nWhich of these would you like to book? Please provide the Flight ID, and I will secure the booking for you.",
+                    "thought_signature": "AY89a18rhDEse2gR+3RLBhJSsPCnb+f9OmOLCz38b86pAeian29TsKYMH5OjEhXIyJg="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:42:55.787972+00:00"
+            }
+          ]
+        },
+        {
+          "turn_index": 2,
+          "turn_id": "e-4a56bb0a-ba02-4191-bc23-d9a2b322f05c",
+          "events": [
+            {
+              "author": "user",
+              "content": {
+                "parts": [
+                  {
+                    "text": "The earliest one works best for me. Let's book FL-102."
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:47:28.744365+00:00"
+            }
+          ]
+        },
+        {
+          "turn_index": 3,
+          "turn_id": "e-ac8e5be8-55b6-4622-a6e6-15f4a9b796e0",
+          "events": [
+            {
+              "author": "user",
+              "content": {
+                "parts": [
+                  {
+                    "text": "Hey, just wanted to check if you were able to book that flight FL-102 for me?"
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:47:49.394579+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_call": {
+                      "id": "adk-f331da8a-518b-4224-b337-036c12c7b23d",
+                      "args": {
+                        "flight_id": "FL-102"
+                      },
+                      "name": "book_flight"
+                    },
+                    "thought_signature": "AY89a18kenAlJgOWr168KLOjwpHKc1CN4dxxYAKF629WGlhEsI0CZe3GPj+s+oHZN54="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:47:49.394579+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_response": {
+                      "id": "adk-f331da8a-518b-4224-b337-036c12c7b23d",
+                      "name": "book_flight",
+                      "response": {
+                        "result": "Successfully booked flight FL-102! Booking confirmation reference: BK-2937."
+                      }
+                    }
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:47:49.394579+00:00"
+            },
+            {
+              "author": "agent",
+              "content": {
+                "parts": [
+                  {
+                    "text": "Yes, I have successfully booked flight **FL-102** (departing SFO at 08:00 AM) for you! \n\nYour booking confirmation reference is **BK-2937**. Safe travels on your trip to JFK! Let me know if you need any other assistance.",
+                    "thought_signature": "AY89a18PlRN05QcLX0eUKG96S7NAN1Dxos8q+e4mrAev+hbQ3bTx8EATOIfbQerQ4e0="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:47:49.394579+00:00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "starting_prompt": "Hi there! I'm planning a budget vacation and I want to fly from SFO to JFK on 2024-11-15.",
+    "conversation_plan": "Wait for the agent to list the flight options for 2024-11-15. Once they do, state that the prices are too high and ask if there are cheaper options on 2024-11-14. After the agent lists the flights for the 14th, tell the agent to book the cheapest flight by explicitly specifying its flight ID.",
+    "agent_data": {
+      "agents": {
+        "travel_agent": {
+          "agent_id": "travel_agent",
+          "agent_type": "LlmAgent",
+          "description": "",
+          "instruction": "You are a travel expert, help users to find flights, book flights with flight ID",
+          "tools": [
+            {
+              "function_declarations": [
+                {
+                  "description": "Find available flights between origin and destination on a given date.\n\nArgs:\n    origin: The starting airport code or city (e.g., 'SFO').\n    destination: The destination airport code or city (e.g., 'JFK').\n    date: The date of the flight (e.g., '2026-07-13').\n    \nReturns:\n    A list of available flights with IDs and prices.",
+                  "name": "find_flights",
+                  "parameters_json_schema": {
+                    "properties": {
+                      "origin": {
+                        "title": "Origin",
+                        "type": "string"
+                      },
+                      "destination": {
+                        "title": "Destination",
+                        "type": "string"
+                      },
+                      "date": {
+                        "title": "Date",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "origin",
+                      "destination",
+                      "date"
+                    ],
+                    "title": "find_flightsParams",
+                    "type": "object"
+                  },
+                  "response_json_schema": {
+                    "type": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "function_declarations": [
+                {
+                  "description": "Book a flight using its flight ID.\n\nArgs:\n    flight_id: The unique ID of the flight to book.\n    \nReturns:\n    A confirmation message with a booking reference code.",
+                  "name": "book_flight",
+                  "parameters_json_schema": {
+                    "properties": {
+                      "flight_id": {
+                        "title": "Flight Id",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "flight_id"
+                    ],
+                    "title": "book_flightParams",
+                    "type": "object"
+                  },
+                  "response_json_schema": {
+                    "type": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "sub_agents": []
+        }
+      },
+      "turns": [
+        {
+          "turn_index": 0,
+          "turn_id": "e-46a6f573-9a17-4328-b35e-0b8c843260e0",
+          "events": [
+            {
+              "author": "user",
+              "content": {
+                "parts": [
+                  {
+                    "text": "Hi there! I'm planning a budget vacation and I want to fly from SFO to JFK on 2024-11-15."
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:42:43.170384+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_call": {
+                      "id": "adk-2035a41e-3680-4cf7-924c-73c811c25788",
+                      "args": {
+                        "date": "2024-11-15",
+                        "destination": "JFK",
+                        "origin": "SFO"
+                      },
+                      "name": "find_flights"
+                    },
+                    "thought_signature": "AY89a19/TjbG1qzhXvE6WPbgJfWqsVwXqoYyCzLmahfM/i14wi8GD5loU58vZYDo3ps="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:42:43.170384+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_response": {
+                      "id": "adk-2035a41e-3680-4cf7-924c-73c811c25788",
+                      "name": "find_flights",
+                      "response": {
+                        "result": "Available flights: Flight ID FL-102 (Price: $350, Time: 08:00 AM), Flight ID FL-205 (Price: $420, Time: 01:00 PM)"
+                      }
+                    }
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:42:43.170384+00:00"
+            },
+            {
+              "author": "agent",
+              "content": {
+                "parts": [
+                  {
+                    "text": "I found two available flights from SFO to JFK on November 15, 2024:\n\n1. **Flight ID: FL-102** \n   - **Departure:** 08:00 AM\n   - **Price:** $350\n\n2. **Flight ID: FL-205**\n   - **Departure:** 01:00 PM\n   - **Price:** $420\n\nSince you're planning a budget vacation, **FL-102** is the cheaper option at $350. Would you like me to book this flight for you, or do you prefer the afternoon departure?",
+                    "thought_signature": "AY89a1/UH/Gq0p4zlSQdOF4eWjHc+EZwzb9z/vIQZ6C9J3xXBJbFXbDA6xO5qqD73C0="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:42:43.170384+00:00"
+            }
+          ]
+        },
+        {
+          "turn_index": 1,
+          "turn_id": "e-4f4197f3-f51a-4e7c-9654-c5a6f26ae4f4",
+          "events": [
+            {
+              "author": "user",
+              "content": {
+                "parts": [
+                  {
+                    "text": "Oof, those prices are a bit too high for my budget. Are there any cheaper options on November 14th?"
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:42:54.754172+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_call": {
+                      "id": "adk-82cf17ab-2725-4f3a-9daf-21a10ecc4ddc",
+                      "args": {
+                        "date": "2024-11-14",
+                        "destination": "JFK",
+                        "origin": "SFO"
+                      },
+                      "name": "find_flights"
+                    },
+                    "thought_signature": "AY89a19+PeKpxkfKENe2kXRB9gWiJycpOe3EWU5+0L4ZHCBHOvkzts5nF8fXrPQSKxE="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:42:54.754172+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_response": {
+                      "id": "adk-82cf17ab-2725-4f3a-9daf-21a10ecc4ddc",
+                      "name": "find_flights",
+                      "response": {
+                        "result": "Available flights: Flight ID FL-102 (Price: $350, Time: 08:00 AM), Flight ID FL-205 (Price: $420, Time: 01:00 PM)"
+                      }
+                    }
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:42:54.754172+00:00"
+            },
+            {
+              "author": "agent",
+              "content": {
+                "parts": [
+                  {
+                    "text": "It looks like the flights for November 14th have the same pricing and schedule:\n\n1. **Flight ID: FL-102**\n   - **Departure:** 08:00 AM\n   - **Price:** $350\n\n2. **Flight ID: FL-205**\n   - **Departure:** 01:00 PM\n   - **Price:** $420\n\nThe lowest price remains $350. Let me know if you would like to go ahead with one of these, or if you'd like to check another date!",
+                    "thought_signature": "AY89a18UvXM9kzaQF6GvbCwk1lDngZ7PBPiS64SdVHxXVS7huam/i/jrG7hcDTzY83s="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:42:54.754172+00:00"
+            }
+          ]
+        },
+        {
+          "turn_index": 2,
+          "turn_id": "e-8818788f-da76-453a-b918-4467cd27e5de",
+          "events": [
+            {
+              "author": "user",
+              "content": {
+                "parts": [
+                  {
+                    "text": "Alright, I guess that's the best price I'm going to get. Let's go ahead and book FL-102."
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:43:05.593450+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_call": {
+                      "id": "adk-d891939e-7ebf-4eb3-952b-b019bc40a7c4",
+                      "args": {
+                        "flight_id": "FL-102"
+                      },
+                      "name": "book_flight"
+                    },
+                    "thought_signature": "AY89a18Eq0GDL0W8pqc72RTtqqgKWwP81zZFY4cwyGOlUtnBS5dx8Fjgy+42SnTW9BA="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:43:05.593450+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_response": {
+                      "id": "adk-d891939e-7ebf-4eb3-952b-b019bc40a7c4",
+                      "name": "book_flight",
+                      "response": {
+                        "result": "Successfully booked flight FL-102! Booking confirmation reference: BK-2937."
+                      }
+                    }
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:43:05.593450+00:00"
+            },
+            {
+              "author": "agent",
+              "content": {
+                "parts": [
+                  {
+                    "text": "Great choice! I have successfully booked flight **FL-102** for you. \n\nYour booking confirmation reference is **BK-2937**. \n\nHave a wonderful trip to New York! Let me know if you need help with anything else.",
+                    "thought_signature": "AY89a19Uoah+QL+RhailaKid8E0pG8BlMUdT6D9FtstbA+NEIZ/LBcR0OXaUyfHiTHw="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:43:05.593450+00:00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "starting_prompt": "Hello. I need a flight for 2024-05-14 from SFO to JFK so I can visit my grandson.",
+    "conversation_plan": "When the agent returns flights for 2024-05-14, act indecisive and say you would actually prefer to fly out on 2024-05-17 to give yourself more packing time. Once the agent searches and returns the new flights, tell them to book the latest flight available that day by providing its exact flight ID from their list.",
+    "agent_data": {
+      "agents": {
+        "travel_agent": {
+          "agent_id": "travel_agent",
+          "agent_type": "LlmAgent",
+          "description": "",
+          "instruction": "You are a travel expert, help users to find flights, book flights with flight ID",
+          "tools": [
+            {
+              "function_declarations": [
+                {
+                  "description": "Find available flights between origin and destination on a given date.\n\nArgs:\n    origin: The starting airport code or city (e.g., 'SFO').\n    destination: The destination airport code or city (e.g., 'JFK').\n    date: The date of the flight (e.g., '2026-07-13').\n    \nReturns:\n    A list of available flights with IDs and prices.",
+                  "name": "find_flights",
+                  "parameters_json_schema": {
+                    "properties": {
+                      "origin": {
+                        "title": "Origin",
+                        "type": "string"
+                      },
+                      "destination": {
+                        "title": "Destination",
+                        "type": "string"
+                      },
+                      "date": {
+                        "title": "Date",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "origin",
+                      "destination",
+                      "date"
+                    ],
+                    "title": "find_flightsParams",
+                    "type": "object"
+                  },
+                  "response_json_schema": {
+                    "type": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "function_declarations": [
+                {
+                  "description": "Book a flight using its flight ID.\n\nArgs:\n    flight_id: The unique ID of the flight to book.\n    \nReturns:\n    A confirmation message with a booking reference code.",
+                  "name": "book_flight",
+                  "parameters_json_schema": {
+                    "properties": {
+                      "flight_id": {
+                        "title": "Flight Id",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "flight_id"
+                    ],
+                    "title": "book_flightParams",
+                    "type": "object"
+                  },
+                  "response_json_schema": {
+                    "type": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "sub_agents": []
+        }
+      },
+      "turns": [
+        {
+          "turn_index": 0,
+          "turn_id": "e-6b5a15a1-f021-408c-9800-75166b5a448b",
+          "events": [
+            {
+              "author": "user",
+              "content": {
+                "parts": [
+                  {
+                    "text": "Hello. I need a flight for 2024-05-14 from SFO to JFK so I can visit my grandson."
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:42:42.711182+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_call": {
+                      "id": "adk-1875a7bf-a288-4132-bc62-3f6950adc9a9",
+                      "args": {
+                        "origin": "SFO",
+                        "date": "2024-05-14",
+                        "destination": "JFK"
+                      },
+                      "name": "find_flights"
+                    },
+                    "thought_signature": "AY89a18CH9tRPka8Okfxn36zQDh60Dabq6IkhoKi6g22PHn3f1n7jSQIINg4O/l6vGY="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:42:42.711182+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_response": {
+                      "id": "adk-1875a7bf-a288-4132-bc62-3f6950adc9a9",
+                      "name": "find_flights",
+                      "response": {
+                        "result": "Available flights: Flight ID FL-102 (Price: $350, Time: 08:00 AM), Flight ID FL-205 (Price: $420, Time: 01:00 PM)"
+                      }
+                    }
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:42:42.711182+00:00"
+            },
+            {
+              "author": "agent",
+              "content": {
+                "parts": [
+                  {
+                    "text": "I found two available flights for you from SFO to JFK on May 14, 2024:\n\n1. **Flight ID: FL-102** \n   - **Departure Time:** 08:00 AM\n   - **Price:** $350\n\n2. **Flight ID: FL-205**\n   - **Departure Time:** 01:00 PM\n   - **Price:** $420\n\nWould you like me to book one of these flights for you? If so, please let me know which flight ID you prefer!",
+                    "thought_signature": "AY89a1/Hap+LGtc/2stVCOtH03taEcazYV7iRxZlLnNEKZzQyxsi4WTm+n+rnFuY0E8="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:42:42.711182+00:00"
+            }
+          ]
+        },
+        {
+          "turn_index": 1,
+          "turn_id": "e-0a2cec4f-1fbd-4c99-861b-1c783e3ee3ac",
+          "events": [
+            {
+              "author": "user",
+              "content": {
+                "parts": [
+                  {
+                    "text": "Hmm, actually, I'm feeling a bit rushed. I think I would prefer to fly out on May 17th, 2024 instead, just to give myself some more packing time. Can you see what's available on that day?"
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:42:53.853737+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_call": {
+                      "id": "adk-6fbd67f7-a89b-48d8-80cc-c509c53a2088",
+                      "args": {
+                        "origin": "SFO",
+                        "destination": "JFK",
+                        "date": "2024-05-17"
+                      },
+                      "name": "find_flights"
+                    },
+                    "thought_signature": "AY89a19NdNdHeA7UYqdIVVIDNL6rUOsoT3CUhy+VOiuC8RBtivkS6edWKIJQbp+Qcgs="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:42:53.853737+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_response": {
+                      "id": "adk-6fbd67f7-a89b-48d8-80cc-c509c53a2088",
+                      "name": "find_flights",
+                      "response": {
+                        "result": "Available flights: Flight ID FL-102 (Price: $350, Time: 08:00 AM), Flight ID FL-205 (Price: $420, Time: 01:00 PM)"
+                      }
+                    }
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:42:53.853737+00:00"
+            },
+            {
+              "author": "agent",
+              "content": {
+                "parts": [
+                  {
+                    "text": "I found the same flight options available for you on May 17, 2024:\n\n1. **Flight ID: FL-102**\n   - **Departure Time:** 08:00 AM\n   - **Price:** $350\n\n2. **Flight ID: FL-205**\n   - **Departure Time:** 01:00 PM\n   - **Price:** $420\n\nWhich of these would you like to book for your trip?",
+                    "thought_signature": "AY89a18EP6BLyZZrGZ6MSbU+K9m1mGsaq0f9oHleoniK38FJBKZF3yd6iOd2fTSjdv8="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:42:53.853737+00:00"
+            }
+          ]
+        },
+        {
+          "turn_index": 2,
+          "turn_id": "e-682766c8-73d4-40fe-a278-19ad2ed5004e",
+          "events": [
+            {
+              "author": "user",
+              "content": {
+                "parts": [
+                  {
+                    "text": "Awesome, let's go with the later flight. Can you please book FL-205 for me?"
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:43:04.586676+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_call": {
+                      "id": "adk-c18ec707-28e4-4ad3-992a-a7a35f1907fd",
+                      "args": {
+                        "flight_id": "FL-205"
+                      },
+                      "name": "book_flight"
+                    },
+                    "thought_signature": "AY89a1/NzW0Uzfy1IPlOcvtbJg27r9JGfm45SSCRFaDpsLvGir3ohGFUbFZ1/TAqdQM="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:43:04.586676+00:00"
+            },
+            {
+              "author": "travel_agent",
+              "content": {
+                "parts": [
+                  {
+                    "function_response": {
+                      "id": "adk-c18ec707-28e4-4ad3-992a-a7a35f1907fd",
+                      "name": "book_flight",
+                      "response": {
+                        "result": "Successfully booked flight FL-205! Booking confirmation reference: BK-2085."
+                      }
+                    }
+                  }
+                ],
+                "role": "user"
+              },
+              "event_time": "2026-07-09T02:43:04.586676+00:00"
+            },
+            {
+              "author": "agent",
+              "content": {
+                "parts": [
+                  {
+                    "text": "I have successfully booked your flight! \n\n**Booking Details:**\n* **Flight ID:** FL-205 (SFO to JFK on May 17, 2024, departing at 01:00 PM)\n* **Confirmation Reference:** BK-2085\n\nHave a wonderful trip visiting your grandson! Let me know if you need any further assistance.",
+                    "thought_signature": "AY89a18yXZ8TksPsNjK7X4tNSPW2YqnLmO15mUXsO7nzfJuRFAvz+jW8a2ZTWMtLCDc="
+                  }
+                ],
+                "role": "model"
+              },
+              "event_time": "2026-07-09T02:43:04.586676+00:00"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
