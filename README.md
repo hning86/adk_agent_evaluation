@@ -17,25 +17,25 @@ The simulation comprises three key components:
 3. **LLM-Backed User Simulator**: Spawns an internal Gemini model configured to act like a customer, systematically executing the testing plan against the Travel Agent.
 
 ```mermaid
-graph LR
+graph TD
     subgraph Step 1: Scenario Generation
-        S1[1_generate_scenarios.py] -->|Generates Scenarios| Scen[output/generated_scenarios.json]
+        S1[1_generate_scenarios.py] -->|Writes| Scen[output/generated_scenarios.json]
     end
 
     subgraph Step 2: Dialogue Simulation
-        S2[2_simulate_dialogues.py] -->|Loads Scenarios| Scen
+        Scen -->|Input| S2[2_simulate_dialogues.py]
         S2 -->|Runs run_inference| Sim[User Simulator]
         Sim <-->|Multi-turn Dialogue| TA[Travel Agent]
         TA <-->|Executes| Tools[Mock Tools: find_flights / book_flight]
-        Sim -->|Persists Traces| Traces[output/simulated_traces.json]
+        Sim -->|Writes Traces| Traces[output/simulated_traces.json]
     end
 
     subgraph Step 3: Evaluation & Reporting
-        S3[3_evaluate_traces.py] -->|Loads Scenarios| Scen
-        S3 -->|Loads Traces| Traces
-        S3 -->|Runs evaluate| Evals[Vertex AI Evals Service]
-        Evals -->|Calculates Metrics| Metrics[Task Success, Trajectory Quality, Tool Use Quality]
-        Evals -->|Saves Report| Report[output/evaluation_report.json]
+        Scen -->|Reference| S3[3_evaluate_traces.py]
+        Traces -->|Evaluation Input| S3
+        S3 -->|Triggers evaluate| Evals[Vertex AI Evals Service]
+        Evals -->|Computes| Metrics[Task Success, Trajectory Quality, Tool Use Quality]
+        Evals -->|Writes Report| Report[output/evaluation_report.json]
     end
 
     classDef files fill:#fcf,stroke:#f6f,stroke-width:1px;
@@ -255,7 +255,14 @@ Below are the aggregated results from the latest execution of `3_evaluate_traces
 ### ⚙️ Setup and Run
 This project uses **`uv`** for fast and reproducible package management.
 
-Run the simulation and evaluation pipeline sequentially:
+#### Option A: Run Single-Step Test Script
+This runs scenario generation, user simulation, and prints transcripts to stdout in a single script:
+```bash
+uv run python test_inference.py
+```
+
+#### Option B: Run the Modular Simulation & Evaluation Pipeline
+This structured approach separates scenario generation, dialogue simulation, and evaluation into individual scripts, persisting outputs at each stage:
 ```bash
 # 1. Generate scenarios (outputs to output/generated_scenarios.json)
 uv run python 1_generate_scenarios.py
