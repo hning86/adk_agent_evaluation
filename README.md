@@ -255,14 +255,7 @@ Below are the aggregated results from the latest execution of `3_evaluate_traces
 ### ⚙️ Setup and Run
 This project uses **`uv`** for fast and reproducible package management.
 
-#### Option A: Run Single-Step Test Script
-This runs scenario generation, user simulation, and prints transcripts to stdout in a single script:
-```bash
-uv run python test_inference.py
-```
-
-#### Option B: Run the Modular Simulation & Evaluation Pipeline
-This structured approach separates scenario generation, dialogue simulation, and evaluation into individual scripts, persisting outputs at each stage:
+Run the simulation and evaluation pipeline sequentially:
 ```bash
 # 1. Generate scenarios (outputs to output/generated_scenarios.json)
 uv run python 1_generate_scenarios.py
