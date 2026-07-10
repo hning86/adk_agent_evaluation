@@ -17,7 +17,7 @@ The simulation comprises three key components:
 3. **LLM-Backed User Simulator**: Spawns an internal Gemini model configured to act like a customer, systematically executing the testing plan against the Travel Agent.
 
 ```mermaid
-graph TD
+graph LR
     subgraph Step 1: Scenario Generation
         S1[1_generate_scenarios.py] -->|Generates Scenarios| Scen[output/generated_scenarios.json]
     end
