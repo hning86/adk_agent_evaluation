@@ -18,11 +18,28 @@ The simulation comprises three key components:
 
 ```mermaid
 graph TD
-    A[test_inference.py] --> B[Generate Conversation Scenarios]
-    B --> C[User Simulator - Gemini 3.5]
-    C <-->|Multi-turn Dialogue| D[Travel Agent - Gemini 3.5]
-    D <-->|Executes| E[Mock Tools: find_flights / book_flight]
-    C --> F[Evaluation Dataset / Traces]
+    subgraph Step 1: Scenario Generation
+        S1[1_generate_scenarios.py] -->|Generates Scenarios| Scen[output/generated_scenarios.json]
+    end
+
+    subgraph Step 2: Dialogue Simulation
+        S2[2_simulate_dialogues.py] -->|Loads Scenarios| Scen
+        S2 -->|Runs run_inference| Sim[User Simulator]
+        Sim <-->|Multi-turn Dialogue| TA[Travel Agent]
+        TA <-->|Executes| Tools[Mock Tools: find_flights / book_flight]
+        Sim -->|Persists Traces| Traces[output/simulated_traces.json]
+    end
+
+    subgraph Step 3: Evaluation & Reporting
+        S3[3_evaluate_traces.py] -->|Loads Scenarios| Scen
+        S3 -->|Loads Traces| Traces
+        S3 -->|Runs evaluate| Evals[Vertex AI Evals Service]
+        Evals -->|Calculates Metrics| Metrics[Task Success, Trajectory Quality, Tool Use Quality]
+        Evals -->|Saves Report| Report[output/evaluation_report.json]
+    end
+
+    classDef files fill:#fcf,stroke:#f6f,stroke-width:1px;
+    class Scen,Traces,Report files;
 ```
 
 ---
